@@ -53,3 +53,17 @@ test('Overload', function(){
 
     obj.func('', 1, function(){});
 });
+
+test('Overload.min', function(){
+    var obj = {
+        func: Overload('{Object|String}event, {String}[selector], {*}[data], {Function}fn', function(a, b, c, d){
+            ok(this === obj);
+            ok(typeof a === 'object' || typeof a === 'string');
+            ok(typeof b === 'undefined');
+            ok(typeof c !== 'undefined');
+            ok(typeof d === 'function');
+        })
+    };
+
+    obj.func('', 1, function(){});
+});
